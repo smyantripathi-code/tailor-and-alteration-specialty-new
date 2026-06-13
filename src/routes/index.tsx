@@ -1,87 +1,129 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/')({
+  component: Home,
+})
 
-function App() {
+const reviews = [
+  {
+    name: 'Danielle M.',
+    stars: 5,
+    text: 'I brought in a dress that was about two sizes too big and had beautiful beading on a mesh overlay. They got it to fit perfectly for a very reasonable rate.',
+  },
+  {
+    name: 'Local Guide',
+    stars: 5,
+    text: 'Absolutely the kindest and most professional business owners in town. Been here twice for alterations and the service is excellent.',
+  },
+  {
+    name: 'Unilocal Reviewer',
+    stars: 5,
+    text: 'My daughter\'s wedding dress was delivered late and a size smaller than expected. What might have been a disaster turned into a fairytale — meticulous detail at a reasonable price.',
+  },
+]
+
+export default function Home() {
   return (
-    <main className="page-wrap px-4 pb-8 pt-14">
-      <section className="island-shell rise-in relative overflow-hidden rounded-[2rem] px-6 py-10 sm:px-10 sm:py-14">
-        <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(79,184,178,0.32),transparent_66%)]" />
-        <div className="pointer-events-none absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(47,106,74,0.18),transparent_66%)]" />
-        <p className="island-kicker mb-3">TanStack Start Base Template</p>
-        <h1 className="display-title mb-5 max-w-3xl text-4xl leading-[1.02] font-bold tracking-tight text-[var(--sea-ink)] sm:text-6xl">
-          Start simple, ship quickly.
-        </h1>
-        <p className="mb-8 max-w-2xl text-base text-[var(--sea-ink-soft)] sm:text-lg">
-          This base starter intentionally keeps things light: two routes, clean
-          structure, and the essentials you need to build from scratch.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <a
-            href="/about"
-            className="rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-[var(--lagoon-deep)] no-underline transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)]"
-          >
-            About This Starter
-          </a>
-          <a
-            href="https://tanstack.com/router"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-[rgba(23,58,64,0.2)] bg-white/50 px-5 py-2.5 text-sm font-semibold text-[var(--sea-ink)] no-underline transition hover:-translate-y-0.5 hover:border-[rgba(23,58,64,0.35)]"
-          >
-            Router Guide
-          </a>
+    <>
+      {/* Hero */}
+      <section className="hero">
+        <div className="container hero-inner">
+          <div className="hero-text">
+            <p className="eyebrow">Lake Oswego, Oregon</p>
+            <h1>Every garment, fitted to you.</h1>
+            <p className="hero-sub">
+              From a simple hem to a full wedding dress transformation, Tailor &amp; Alteration Specialty delivers precise, personal workmanship at prices that make sense.
+            </p>
+            <div className="hero-actions">
+              <a href="tel:5036363454" className="btn-primary">Call (503) 636-3454</a>
+              <Link to="/services" className="btn-outline">Our Services</Link>
+            </div>
+            <div className="hero-meta">
+              <span className="stars">★★★★★</span>
+              <span>4.5 · 70 reviews on Google</span>
+              <span className="dot">·</span>
+              <span>Walk-ins welcome</span>
+            </div>
+          </div>
+          <div className="hero-card">
+            <div className="hours-card">
+              <h3>Hours &amp; Location</h3>
+              <table className="hours-table">
+                <tbody>
+                  <tr><td>Tue – Fri</td><td>9:30 AM – 6:00 PM</td></tr>
+                  <tr><td>Saturday</td><td>9:30 AM – 5:00 PM</td></tr>
+                  <tr><td>Sun – Mon</td><td>Closed</td></tr>
+                </tbody>
+              </table>
+              <div className="hours-divider" />
+              <p className="hours-addr">333 S State St, Suite K<br />Lake Place · Lake Oswego, OR 97034</p>
+              <a
+                href="https://maps.google.com/?q=333+S+State+St+K+Lake+Oswego+OR+97034"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline full-width"
+              >
+                Get Directions
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          [
-            'Type-Safe Routing',
-            'Routes and links stay in sync across every page.',
-          ],
-          [
-            'Server Functions',
-            'Call server code from your UI without creating API boilerplate.',
-          ],
-          [
-            'Streaming by Default',
-            'Ship progressively rendered responses for faster experiences.',
-          ],
-          [
-            'Tailwind Native',
-            'Design quickly with utility-first styling and reusable tokens.',
-          ],
-        ].map(([title, desc], index) => (
-          <article
-            key={title}
-            className="island-shell feature-card rise-in rounded-2xl p-5"
-            style={{ animationDelay: `${index * 90 + 80}ms` }}
-          >
-            <h2 className="mb-2 text-base font-semibold text-[var(--sea-ink)]">
-              {title}
-            </h2>
-            <p className="m-0 text-sm text-[var(--sea-ink-soft)]">{desc}</p>
-          </article>
-        ))}
+      {/* Services snapshot */}
+      <section className="services-snap section">
+        <div className="container">
+          <p className="section-label">What we do</p>
+          <h2>Alterations for every occasion</h2>
+          <div className="service-grid">
+            {[
+              { icon: '👗', title: 'Wedding Dresses', desc: 'Rush timelines, complex beading, complete resizing — we handle it all with precision.' },
+              { icon: '🎩', title: 'Suits & Formal Wear', desc: 'Chest, sleeve, waist, hem — Italian suits to everyday blazers, expertly fitted.' },
+              { icon: '👖', title: 'Everyday Clothing', desc: 'Pants, jeans, dresses, and more. Bring anything in; walk-ins always welcome.' },
+              { icon: '🪡', title: 'Repairs & Zippers', desc: 'Ripped seams, broken zippers, torn linings — no job is too small.' },
+              { icon: '🛋', title: 'Home Furnishings', desc: 'Cushion covers, draperies, and furniture covers made or fitted to order.' },
+              { icon: '🧥', title: 'Specialty Garments', desc: 'Shearling coats, leather, vintage — we work with materials others turn away.' },
+            ].map((s) => (
+              <div key={s.title} className="service-card">
+                <span className="service-icon">{s.icon}</span>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+            <Link to="/services" className="btn-outline">See full service list</Link>
+          </div>
+        </div>
       </section>
 
-      <section className="island-shell mt-8 rounded-2xl p-6">
-        <p className="island-kicker mb-2">Quick Start</p>
-        <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[var(--sea-ink-soft)]">
-          <li>
-            Edit <code>src/routes/index.tsx</code> to customize the home page.
-          </li>
-          <li>
-            Update <code>src/components/Header.tsx</code> and{' '}
-            <code>src/components/Footer.tsx</code> for brand links.
-          </li>
-          <li>
-            Add routes in <code>src/routes</code> and tweak visual tokens in{' '}
-            <code>src/styles.css</code>.
-          </li>
-        </ul>
+      {/* Reviews */}
+      <section className="reviews-section section">
+        <div className="container">
+          <p className="section-label">What people say</p>
+          <h2>Trusted by the Lake Oswego community</h2>
+          <div className="review-grid">
+            {reviews.map((r) => (
+              <div key={r.name} className="review-card">
+                <div className="review-stars">{'★'.repeat(r.stars)}</div>
+                <p className="review-text">"{r.text}"</p>
+                <p className="review-name">— {r.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
-    </main>
+
+      {/* CTA strip */}
+      <section className="cta-strip">
+        <div className="container cta-inner">
+          <div>
+            <h2>Ready for the perfect fit?</h2>
+            <p>Walk in during business hours or call ahead — we'll take care of the rest.</p>
+          </div>
+          <a href="tel:5036363454" className="btn-primary btn-large">Call (503) 636-3454</a>
+        </div>
+      </section>
+    </>
   )
 }
