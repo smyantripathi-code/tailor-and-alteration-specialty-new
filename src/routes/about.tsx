@@ -81,7 +81,7 @@ export default function About() {
               <div className="rating-stars">★★★★★</div>
               <p>70 reviews on Google</p>
               <a
-                href="https://www.google.com/maps/place/Tailor+%26+Alteration+Specialty"
+                href="https://www.google.com/maps/search/Tailor+%26+Alteration+Specialty+333+S+State+St+Lake+Oswego+OR"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline full-width"
