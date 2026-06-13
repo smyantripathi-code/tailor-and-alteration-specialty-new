@@ -1,61 +1,73 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { TanStackDevtools } from '@tanstack/react-devtools'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-
-import appCss from '../styles.css?url'
-
-const THEME_INIT_SCRIPT = `(function(){try{var stored=window.localStorage.getItem('theme');var mode=(stored==='light'||stored==='dark'||stored==='auto')?stored:'auto';var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var resolved=mode==='auto'?(prefersDark?'dark':'light'):mode;var root=document.documentElement;root.classList.remove('light','dark');root.classList.add(resolved);if(mode==='auto'){root.removeAttribute('data-theme')}else{root.setAttribute('data-theme',mode)}root.style.colorScheme=resolved;}catch(e){}})();`
+import { HeadContent, Link, Scripts, createRootRoute, Outlet } from '@tanstack/react-router'
+import '../styles.css'
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      {
-        charSet: 'utf-8',
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
-      {
-        title: 'TanStack Start Starter',
-      },
-    ],
-    links: [
-      {
-        rel: 'stylesheet',
-        href: appCss,
-      },
+      { charSet: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { title: 'Tailor & Alteration Specialty — Lake Oswego, OR' },
+      { name: 'description', content: 'Expert tailoring, alterations, and wedding dress fitting in Lake Oswego, Oregon. Walk-ins welcome.' },
     ],
   }),
-  shellComponent: RootDocument,
-})
-
-function RootDocument({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" suppressHydrationWarning>
+  shellComponent: ({ children }) => (
+    <html lang="en">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <HeadContent />
       </head>
-      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
-        <Header />
-        {children}
+      <body>
+        <Nav />
+        <main>{children}</main>
         <Footer />
-        <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
         <Scripts />
       </body>
     </html>
+  ),
+  component: () => <Outlet />,
+})
+
+function Nav() {
+  return (
+    <header className="nav">
+      <div className="nav-inner container">
+        <Link to="/" className="nav-brand">
+          <span className="brand-icon">✂</span>
+          <span>Tailor &amp; Alteration Specialty</span>
+        </Link>
+        <nav className="nav-links">
+          <Link to="/services" className="nav-link">Services</Link>
+          <Link to="/about" className="nav-link">About</Link>
+          <a href="tel:5036363454" className="btn-primary nav-cta">Call Us</a>
+        </nav>
+      </div>
+    </header>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="container footer-inner">
+        <div className="footer-col">
+          <p className="footer-brand">✂ Tailor &amp; Alteration Specialty</p>
+          <p className="footer-tagline">Expert alterations in the heart of Lake Oswego since the early 2000s.</p>
+        </div>
+        <div className="footer-col">
+          <h4>Hours</h4>
+          <p>Tue – Fri: 9:30 AM – 6:00 PM</p>
+          <p>Saturday: 9:30 AM – 5:00 PM</p>
+          <p>Sun – Mon: Closed</p>
+        </div>
+        <div className="footer-col">
+          <h4>Find Us</h4>
+          <p>333 S State St, Suite K</p>
+          <p>Lake Oswego, OR 97034</p>
+          <p><a href="tel:5036363454">(503) 636-3454</a></p>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <p>© {new Date().getFullYear()} Tailor &amp; Alteration Specialty. All rights reserved.</p>
+      </div>
+    </footer>
   )
 }
